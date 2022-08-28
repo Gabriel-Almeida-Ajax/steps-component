@@ -1,9 +1,9 @@
 {
   "name": "stepscount",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
-  "main": "./src/view/index.tsx",
+  "main": "./src/main.tsx",
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
