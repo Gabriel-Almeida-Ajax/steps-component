@@ -8,11 +8,13 @@ export const CheckedStepperContainer = styled.div`
     justify-content: space-around;
     width: 100%;
     height: 100%;
+    transition: all 0.3s ease-in-out;
 `;
 export const CircularStepperContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 
     position: relative;
 
@@ -51,10 +53,28 @@ export const CheckedImage = styled.img`
     height: 70%;
     filter: invert(88%) sepia(21%) saturate(935%) hue-rotate(123deg) brightness(85%) contrast(97%);
 `;
-export const LineStepper = styled.div<{ notVisible?: boolean, active: boolean }>`
+export const LineStepper = styled.div`
+    position: relative;
     width: 10%;
     height: 4px;
+    background: transparent;
+`;
+export const LineStepperInner = styled.div<{ notVisible?: boolean, active: boolean, animate?: boolean }>`
+    width: 100%;
+    height: 4px;
     background: ${props => props.notVisible ? 'transparent' : props.active ? props.theme.colors.gradient : props.theme.colors.background};
+
+    ${props => !props.animate ? '' : `
+        animation: load 1s ease-in-out infinite;
+    `}
+    @keyframes load {
+        from {
+            width: 0%;
+        }
+        to {
+            width: 100%;
+        }
+    }
 `;
 
 export const SimpleStepperContainer = styled.div`
@@ -65,8 +85,6 @@ export const SimpleStepperContainer = styled.div`
     border-radius: 5px;
 
     position: relative;
-
-    transition: all 0.3s ease-in-out;
 `;
 type Props = {
     step: number;
@@ -81,7 +99,7 @@ export const StepperItem = styled.div<Props>`
     animation: step ${props => props.step}s linear;
     @keyframes step {
         0% {
-            width: 0%;
+            width: ${props => ((props.step - 1) / props.steps.length) * 100}%;
         }
         100% {
             width: ${props => props.step / props.steps.length * 100}%;

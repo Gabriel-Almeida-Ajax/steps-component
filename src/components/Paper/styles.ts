@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const Paper = styled.div`
+    * {
+        font-family: "Roboto", sans-serif;
+    }
     display: flex;
     flex-direction: column;
     align-items: center;
